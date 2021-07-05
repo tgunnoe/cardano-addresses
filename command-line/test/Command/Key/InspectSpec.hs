@@ -53,6 +53,14 @@ spec = describeCmd [ "key", "inspect" ] $ do
     specInspectPublic CIP5.acct_shared_xvk
     specInspectPublic CIP5.addr_shared_xvk
     specInspectPublic CIP5.stake_shared_xvk
+    specInspectPublic CIP5.root_vk_cc
+    specInspectPublic CIP5.acct_vk_cc
+    specInspectPublic CIP5.addr_vk_cc
+    specInspectPublic CIP5.stake_vk_cc
+    specInspectPublic CIP5.root_shared_vk_cc
+    specInspectPublic CIP5.acct_shared_vk_cc
+    specInspectPublic CIP5.addr_shared_vk_cc
+    specInspectPublic CIP5.stake_shared_vk_cc
 
 specInspectPrivate :: HumanReadablePart -> SpecWith ()
 specInspectPrivate hrp = it "can inspect private key" $ do

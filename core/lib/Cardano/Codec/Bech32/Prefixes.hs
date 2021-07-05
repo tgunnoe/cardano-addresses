@@ -25,36 +25,44 @@ module Cardano.Codec.Bech32.Prefixes
     , addr_vk
     , addr_sk
     , addr_xvk
+    , addr_vk_cc
     , addr_xsk
     , acct_vk
     , acct_sk
     , acct_xvk
+    , acct_vk_cc
     , acct_xsk
     , root_vk
     , root_sk
     , root_xvk
+    , root_vk_cc
     , root_xsk
     , stake_vk
     , stake_sk
     , stake_xvk
+    , stake_vk_cc
     , stake_xsk
 
       -- * Keys for 1854H
     , addr_shared_vk
     , addr_shared_sk
     , addr_shared_xvk
+    , addr_shared_vk_cc
     , addr_shared_xsk
     , acct_shared_vk
     , acct_shared_sk
     , acct_shared_xvk
+    , acct_shared_vk_cc
     , acct_shared_xsk
     , root_shared_vk
     , root_shared_sk
     , root_shared_xvk
+    , root_shared_vk_cc
     , root_shared_xsk
     , stake_shared_vk
     , stake_shared_sk
     , stake_shared_xvk
+    , stake_shared_vk_cc
     , stake_shared_xsk
 
     ) where
@@ -94,6 +102,9 @@ addr_sk = [humanReadablePart|addr_sk|]
 addr_xvk :: HumanReadablePart
 addr_xvk = [humanReadablePart|addr_xvk|]
 
+addr_vk_cc :: HumanReadablePart
+addr_vk_cc = [humanReadablePart|addr_vk+cc|]
+
 addr_xsk :: HumanReadablePart
 addr_xsk = [humanReadablePart|addr_xsk|]
 
@@ -105,6 +116,9 @@ acct_sk = [humanReadablePart|acct_sk|]
 
 acct_xvk :: HumanReadablePart
 acct_xvk = [humanReadablePart|acct_xvk|]
+
+acct_vk_cc :: HumanReadablePart
+acct_vk_cc = [humanReadablePart|acct_vk+cc|]
 
 acct_xsk :: HumanReadablePart
 acct_xsk = [humanReadablePart|acct_xsk|]
@@ -118,6 +132,9 @@ root_sk = [humanReadablePart|root_sk|]
 root_xvk :: HumanReadablePart
 root_xvk = [humanReadablePart|root_xvk|]
 
+root_vk_cc :: HumanReadablePart
+root_vk_cc = [humanReadablePart|root_vk+cc|]
+
 root_xsk :: HumanReadablePart
 root_xsk = [humanReadablePart|root_xsk|]
 
@@ -129,6 +146,9 @@ stake_sk = [humanReadablePart|stake_sk|]
 
 stake_xvk :: HumanReadablePart
 stake_xvk = [humanReadablePart|stake_xvk|]
+
+stake_vk_cc :: HumanReadablePart
+stake_vk_cc = [humanReadablePart|stake_xvk+cc|]
 
 stake_xsk :: HumanReadablePart
 stake_xsk = [humanReadablePart|stake_xsk|]
@@ -142,6 +162,9 @@ addr_shared_sk = [humanReadablePart|addr_shared_sk|]
 addr_shared_xvk :: HumanReadablePart
 addr_shared_xvk = [humanReadablePart|addr_shared_xvk|]
 
+addr_shared_vk_cc :: HumanReadablePart
+addr_shared_vk_cc = [humanReadablePart|addr_shared_vk+cc|]
+
 addr_shared_xsk :: HumanReadablePart
 addr_shared_xsk = [humanReadablePart|addr_shared_xsk|]
 
@@ -153,6 +176,9 @@ acct_shared_sk = [humanReadablePart|acct_shared_sk|]
 
 acct_shared_xvk :: HumanReadablePart
 acct_shared_xvk = [humanReadablePart|acct_shared_xvk|]
+
+acct_shared_vk_cc :: HumanReadablePart
+acct_shared_vk_cc = [humanReadablePart|acct_shared_vk+cc|]
 
 acct_shared_xsk :: HumanReadablePart
 acct_shared_xsk = [humanReadablePart|acct_shared_xsk|]
@@ -166,6 +192,9 @@ root_shared_sk = [humanReadablePart|root_shared_sk|]
 root_shared_xvk :: HumanReadablePart
 root_shared_xvk = [humanReadablePart|root_shared_xvk|]
 
+root_shared_vk_cc :: HumanReadablePart
+root_shared_vk_cc = [humanReadablePart|root_shared_vk+cc|]
+
 root_shared_xsk :: HumanReadablePart
 root_shared_xsk = [humanReadablePart|root_shared_xsk|]
 
@@ -177,6 +206,9 @@ stake_shared_sk = [humanReadablePart|stake_shared_sk|]
 
 stake_shared_xvk :: HumanReadablePart
 stake_shared_xvk = [humanReadablePart|stake_shared_xvk|]
+
+stake_shared_vk_cc :: HumanReadablePart
+stake_shared_vk_cc = [humanReadablePart|stake_shared_vk+cc|]
 
 stake_shared_xsk :: HumanReadablePart
 stake_shared_xsk = [humanReadablePart|stake_shared_xsk|]

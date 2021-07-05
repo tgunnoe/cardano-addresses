@@ -53,20 +53,35 @@ run Hash = do
   where
     -- Mapping of input HRP to output HRP
     prefixes =
-        [ ( CIP5.addr_vk         , CIP5.addr_vkh   )
-        , ( CIP5.addr_xvk        , CIP5.addr_vkh   )
-        , ( CIP5.stake_vk        , CIP5.stake_vkh  )
-        , ( CIP5.stake_xvk       , CIP5.stake_vkh  )
-        , ( CIP5.addr_shared_vk  , CIP5.addr_shared_vkh )
-        , ( CIP5.addr_shared_xvk , CIP5.addr_shared_vkh )
-        , ( CIP5.stake_shared_vk , CIP5.stake_shared_vkh )
-        , ( CIP5.stake_shared_xvk, CIP5.stake_shared_vkh )
+        [ ( CIP5.addr_vk           , CIP5.addr_vkh   )
+        , ( CIP5.addr_xvk          , CIP5.addr_vkh   )
+        , ( CIP5.addr_vk_cc        , CIP5.addr_vkh   )
+        , ( CIP5.stake_vk          , CIP5.stake_vkh  )
+        , ( CIP5.stake_xvk         , CIP5.stake_vkh  )
+        , ( CIP5.stake_vk_cc       , CIP5.stake_vkh  )
+        , ( CIP5.addr_shared_vk    , CIP5.addr_shared_vkh )
+        , ( CIP5.addr_shared_xvk   , CIP5.addr_shared_vkh )
+        , ( CIP5.addr_shared_vk_cc , CIP5.addr_shared_vkh )
+        , ( CIP5.stake_shared_vk   , CIP5.stake_shared_vkh )
+        , ( CIP5.stake_shared_xvk  , CIP5.stake_shared_vkh )
+        , ( CIP5.stake_shared_vk_cc, CIP5.stake_shared_vkh )
         ]
     allowedPrefixes = map fst prefixes
     prefixFor = fromJust . flip lookup prefixes
 
+    extendedVerKeyPrefixes =
+        [ CIP5.addr_xvk
+        , CIP5.addr_vk_cc
+        , CIP5.stake_xvk
+        , CIP5.stake_vk_cc
+        , CIP5.addr_shared_xvk
+        , CIP5.addr_shared_vk_cc
+        , CIP5.stake_shared_xvk
+        , CIP5.stake_shared_vk_cc
+        ]
+
     guardBytes hrp bytes
-        | hrp `elem` [CIP5.addr_xvk, CIP5.stake_xvk, CIP5.addr_shared_xvk, CIP5.stake_shared_xvk] = do
+        | hrp `elem` extendedVerKeyPrefixes = do
             when (BS.length bytes /= 64) $
                 fail "data should be a 32-byte public key with a 32-byte chain-code appended"
 

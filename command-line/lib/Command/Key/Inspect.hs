@@ -60,20 +60,28 @@ run Inspect = do
     allowedPrefixes :: [HumanReadablePart]
     allowedPrefixes =
         [ CIP5.root_xvk
+        , CIP5.root_vk_cc
         , CIP5.root_xsk
         , CIP5.acct_xvk
+        , CIP5.acct_vk_cc
         , CIP5.acct_xsk
         , CIP5.addr_xvk
+        , CIP5.addr_vk_cc
         , CIP5.addr_xsk
         , CIP5.stake_xvk
+        , CIP5.stake_vk_cc
         , CIP5.stake_xsk
         , CIP5.root_shared_xvk
+        , CIP5.root_shared_vk_cc
         , CIP5.root_shared_xsk
         , CIP5.acct_shared_xvk
+        , CIP5.acct_shared_vk_cc
         , CIP5.acct_shared_xsk
         , CIP5.addr_shared_xvk
+        , CIP5.addr_shared_vk_cc
         , CIP5.addr_shared_xsk
         , CIP5.stake_shared_xvk
+        , CIP5.stake_shared_vk_cc
         , CIP5.stake_shared_xsk
         ]
 
