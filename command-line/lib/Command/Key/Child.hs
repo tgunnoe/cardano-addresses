@@ -84,9 +84,11 @@ run Child{path} = do
         [ CIP5.root_xsk
         , CIP5.acct_xsk
         , CIP5.acct_xvk
+        , CIP5.acct_vk_cc
         , CIP5.root_shared_xsk
         , CIP5.acct_shared_xsk
         , CIP5.acct_shared_xvk
+        , CIP5.acct_shared_vk_cc
         ]
 
     -- As a reminder, we really have two scenarios:
@@ -116,7 +118,7 @@ run Child{path} = do
     -- acct_xsk => addr_xsk: (hard derivation from account to address)
     --     m / purpose' / coin_type' / account' => m / purpose' / coin_type' / account' / role / index
     --
-    -- acct_xvk => addr_xvk: (soft derivation from account to address)
+    -- acct_xvk => addr_xvk / acct_vk+cc => addr_vk+cc: (soft derivation from account to address)
     --     m / purpose' / coin_type' / account' => m / purpose' / coin_type' / account' / role / index
     --
     --
@@ -138,7 +140,7 @@ run Child{path} = do
     -- shared_acct_xsk => shared_addr_xsk: (hard derivation from account to address)
     --     m / purpose' / coin_type' / account' => m / purpose' / coin_type' / account' / role / index
     --
-    -- shared_acct_xvk => shared_addr_xvk: (soft derivation from account to address)
+    -- shared_acct_xvk => shared_addr_xvk / shared_acct_vk+cc => shared_addr_vk+cc: (soft derivation from account to address)
     --     m / purpose' / coin_type' / account' => m / purpose' / coin_type' / account' / role / index
     --
     --
@@ -159,15 +161,19 @@ run Child{path} = do
     childHrpFor [2,_] hrp
         | hrp == CIP5.acct_xsk = pure CIP5.stake_xsk
         | hrp == CIP5.acct_xvk = pure CIP5.stake_xvk
+        | hrp == CIP5.acct_vk_cc = pure CIP5.stake_vk_cc
         | hrp == CIP5.acct_shared_xsk = pure CIP5.stake_shared_xsk
         | hrp == CIP5.acct_shared_xvk = pure CIP5.stake_shared_xvk
+        | hrp == CIP5.acct_shared_vk_cc = pure CIP5.stake_shared_vk_cc
 
     childHrpFor [_,_] hrp
         | hrp == CIP5.root_xsk = pure CIP5.addr_xsk
         | hrp == CIP5.acct_xsk = pure CIP5.addr_xsk
         | hrp == CIP5.acct_xvk = pure CIP5.addr_xvk
+        | hrp == CIP5.acct_vk_cc = pure CIP5.addr_vk_cc
         | hrp == CIP5.acct_shared_xsk = pure CIP5.addr_shared_xsk
         | hrp == CIP5.acct_shared_xvk = pure CIP5.addr_shared_xvk
+        | hrp == CIP5.acct_shared_vk_cc = pure CIP5.addr_shared_vk_cc
 
     childHrpFor _ hrp
         | hrp == CIP5.root_xsk = fail

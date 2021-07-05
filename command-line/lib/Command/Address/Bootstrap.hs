@@ -80,7 +80,7 @@ mod liftCmd = command "bootstrap" $
 
 run :: Cmd -> IO ()
 run Cmd{networkTag,rootXPub,derivationPath} = do
-    (_hrp, xpub) <- hGetXPub stdin [CIP5.addr_xvk]
+    (_hrp, xpub) <- hGetXPub stdin [CIP5.addr_xvk, CIP5.addr_vk_cc]
     addr <- case derivationPath of
         Nothing ->
             pure $ Icarus.paymentAddress discriminant (Icarus.liftXPub xpub)

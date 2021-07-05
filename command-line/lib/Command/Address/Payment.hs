@@ -83,6 +83,7 @@ run Cmd{networkTag} = do
     -- this stage, so leaving this as an item for later.
     allowedPrefixes =
         [ CIP5.addr_xvk
+        , CIP5.addr_vk_cc
         , CIP5.script
         ]
 
