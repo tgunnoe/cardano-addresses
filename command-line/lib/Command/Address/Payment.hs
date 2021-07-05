@@ -39,6 +39,7 @@ import System.IO.Extra
 
 import qualified Cardano.Address.Style.Shelley as Shelley
 import qualified Cardano.Codec.Bech32.Prefixes as CIP5
+import qualified Data.ByteString as BS
 
 newtype Cmd = Cmd
     {  networkTag :: NetworkTag
@@ -77,15 +78,20 @@ run Cmd{networkTag} = do
         | networkTag == shelleyTestnet = CIP5.addr_test
         | otherwise = CIP5.addr
 
-    -- TODO: Also allow `XXX_vk` prefixes. We don't need the chain code to
-    -- construct a payment credential. This will however need some additional
-    -- abstraction over `xpubFromBytes` but I've done enough yake-shaving at
-    -- this stage, so leaving this as an item for later.
     allowedPrefixes =
         [ CIP5.addr_xvk
+        , CIP5.addr_vk
         , CIP5.addr_vk_cc
         , CIP5.script
         ]
+
+    processBytes discriminant bytes =
+        case xpubFromBytes bytes of
+            Nothing  ->
+                fail "Couldn't convert bytes into extended public key."
+            Just key -> do
+                let credential = PaymentFromKey $ Shelley.liftXPub key
+                pure $ Shelley.paymentAddress discriminant credential
 
     addressFromBytes discriminant bytes hrp
         | hrp == CIP5.script = do
@@ -96,10 +102,8 @@ run Cmd{networkTag} = do
                     let credential = PaymentFromScript h
                     pure $ Shelley.paymentAddress discriminant credential
 
-        | otherwise = do
-            case xpubFromBytes bytes of
-                Nothing  ->
-                    fail "Couldn't convert bytes into extended public key."
-                Just key -> do
-                    let credential = PaymentFromKey $ Shelley.liftXPub key
-                    pure $ Shelley.paymentAddress discriminant credential
+        | hrp == CIP5.addr_vk =
+              processBytes discriminant (bytes <> BS.replicate 32 0)
+
+        | otherwise =
+              processBytes discriminant bytes

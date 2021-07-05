@@ -13,16 +13,28 @@ import Test.Utils
 
 spec :: Spec
 spec = describeCmd [ "address", "payment" ] $ do
-    specShelley defaultPhrase "1852H/1815H/0H/0/0" "0"
+    specShelley defaultPhrase "1852H/1815H/0H/0/0" "0" "--with-chain-code"
         "addr_test1vpu5vlrf4xkxv2qpwngf6cjhtw542ayty80v8dyr49rf5eg57c2qv"
 
-    specShelley defaultPhrase "1852H/1815H/0H/0/0" "3"
+    specShelley defaultPhrase "1852H/1815H/0H/0/0" "3" "--with-chain-code"
         "addr1vdu5vlrf4xkxv2qpwngf6cjhtw542ayty80v8dyr49rf5eg0m9a08"
 
-    specShelley defaultPhrase "1852H/1815H/0H/0/0" "testnet"
+    specShelley defaultPhrase "1852H/1815H/0H/0/0" "testnet" "--with-chain-code"
         "addr_test1vpu5vlrf4xkxv2qpwngf6cjhtw542ayty80v8dyr49rf5eg57c2qv"
 
-    specShelley defaultPhrase "1852H/1815H/0H/0/0" "mainnet"
+    specShelley defaultPhrase "1852H/1815H/0H/0/0" "mainnet" "--with-chain-code"
+        "addr1v9u5vlrf4xkxv2qpwngf6cjhtw542ayty80v8dyr49rf5eg0kvk0f"
+
+    specShelley defaultPhrase "1852H/1815H/0H/0/0" "0" "--without-chain-code"
+        "addr_test1vpu5vlrf4xkxv2qpwngf6cjhtw542ayty80v8dyr49rf5eg57c2qv"
+
+    specShelley defaultPhrase "1852H/1815H/0H/0/0" "3" "--without-chain-code"
+        "addr1vdu5vlrf4xkxv2qpwngf6cjhtw542ayty80v8dyr49rf5eg0m9a08"
+
+    specShelley defaultPhrase "1852H/1815H/0H/0/0" "testnet" "--without-chain-code"
+        "addr_test1vpu5vlrf4xkxv2qpwngf6cjhtw542ayty80v8dyr49rf5eg57c2qv"
+
+    specShelley defaultPhrase "1852H/1815H/0H/0/0" "mainnet" "--without-chain-code"
         "addr1v9u5vlrf4xkxv2qpwngf6cjhtw542ayty80v8dyr49rf5eg0kvk0f"
 
     specMalformedNetwork "💩"
@@ -30,11 +42,11 @@ spec = describeCmd [ "address", "payment" ] $ do
     specInvalidNetwork "42"
     specInvalidNetwork "staging"
 
-specShelley :: [String] -> String -> String -> String -> SpecWith ()
-specShelley phrase path networkTag want = it ("golden shelley (payment) " <> path) $ do
+specShelley :: [String] -> String -> String -> String -> String -> SpecWith ()
+specShelley phrase path networkTag cc want = it ("golden shelley (payment) " <> path) $ do
     out <- cli [ "key", "from-recovery-phrase", "shelley" ] (unwords phrase)
        >>= cli [ "key", "child", path ]
-       >>= cli [ "key", "public", "--with-chain-code" ]
+       >>= cli [ "key", "public", cc ]
        >>= cli [ "address", "payment", "--network-tag", networkTag ]
     out `shouldBe` want
 
