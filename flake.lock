@@ -318,11 +318,11 @@
     "hackageNix": {
       "flake": false,
       "locked": {
-        "lastModified": 1674001520,
-        "narHash": "sha256-z3xpJmSiWmt8UU0LxMfwxwusis7Rc80/CvTvl2187Yg=",
+        "lastModified": 1674087889,
+        "narHash": "sha256-XDhE+GE33bKrnL+TgdiZwrTwA98+Nz5XQCDtwrQBGo8=",
         "owner": "input-output-hk",
         "repo": "hackage.nix",
-        "rev": "b85cf3a03b9fd1b7c1c7dc66845818e32d195c63",
+        "rev": "710b2e43504dedcd0046067e01aeb688aeebdea0",
         "type": "github"
       },
       "original": {
@@ -361,11 +361,11 @@
         "tullia": "tullia"
       },
       "locked": {
-        "lastModified": 1674003057,
-        "narHash": "sha256-lk1GdGf882DhKTxzS0vASAgUTYhpeBjD+0BrT2pzCk0=",
+        "lastModified": 1674089461,
+        "narHash": "sha256-v05Usb30UrU0nPGtVW2T1n2UB5yUEx3KnQC9JP7ozWc=",
         "owner": "input-output-hk",
         "repo": "haskell.nix",
-        "rev": "3b5140760572fb5162abcedbc8f57991f54cc3c4",
+        "rev": "9cd5fc04b9577d951eca4718b4066f4259bcba5e",
         "type": "github"
       },
       "original": {
@@ -814,7 +814,7 @@
         "iohkNix": "iohkNix",
         "nixpkgs": [
           "haskellNix",
-          "nixpkgs-2105"
+          "nixpkgs-2205"
         ]
       }
     },

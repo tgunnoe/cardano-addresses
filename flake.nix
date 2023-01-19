@@ -2,7 +2,7 @@
   description = "Cardano Addresses";
 
   inputs = {
-    nixpkgs.follows = "haskellNix/nixpkgs-2105";
+    nixpkgs.follows = "haskellNix/nixpkgs-2205";
     hackageNix = {
       url = "github:input-output-hk/hackage.nix";
       flake = false;
