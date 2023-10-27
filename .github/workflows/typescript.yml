@@ -23,14 +23,16 @@ jobs:
         extra_nix_config: |
           trusted-public-keys = hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ= cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=
           substituters = https://cache.iog.io https://cache.nixos.org/
+          experimental-features = nix-command flakes
+
     - name: 'Install dependencies'
-      run: 'nix-shell --run "npm install"'
+      run: 'nix shell nixpkgs#nodejs && npm install'
     - name: 'Build'
-      run: 'nix-shell --run "npm run build"'
+      run: 'nix shell nixpkgs#nodejs && npm run build'
     - name: 'Test'
-      run: 'nix-shell --run "npm run test"'
+      run: 'nix shell nixpkgs#nodejs && npm run test'
     - name: 'Typedoc'
-      run: 'nix-shell --run "npm run typedoc"'
+      run: 'nix shell nixpkgs#nodejs && npm run typedoc'
     - name: 'Demo'
       run: 'nix-build -A demo -o result-demo'
     - name: 'Prepare Documentation'
